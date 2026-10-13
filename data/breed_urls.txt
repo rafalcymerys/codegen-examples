@@ -1,0 +1,3 @@
+https://gist.githubusercontent.com/rafalcymerys/6f77a8579b906a629cad9c18eb625c95/raw/132eb4d83864d8c2450d0f5117b0cfa21dda1bcc/breeds.xml
+
+https://docs.thecatapi.com/docs/examples/breeds

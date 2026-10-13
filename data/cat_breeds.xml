@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Breeds appearing in cats_berlin_clinic datasets. Weight ranges are typical adult weights in kg (females at the low end, males at the high end). -->
+<breeds>
+  <breed>
+    <name>European Shorthair</name>
+    <origin>Europe</origin>
+    <weight_range unit="kg" min="3.5" max="7">3.5–7 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Domestic Shorthair</name>
+    <origin>Worldwide</origin>
+    <weight_range unit="kg" min="3.5" max="7">3.5–7 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Maine Coon</name>
+    <origin>United States</origin>
+    <weight_range unit="kg" min="4" max="11">4–11 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Ragdoll</name>
+    <origin>United States</origin>
+    <weight_range unit="kg" min="4.5" max="9">4.5–9 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Mixed Breed</name>
+    <origin>Worldwide</origin>
+    <weight_range unit="kg" min="3" max="7">3–7 kg</weight_range>
+  </breed>
+  <breed>
+    <name>British Shorthair</name>
+    <origin>United Kingdom</origin>
+    <weight_range unit="kg" min="4" max="8">4–8 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Chartreux</name>
+    <origin>France</origin>
+    <weight_range unit="kg" min="3" max="7.5">3–7.5 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Russian Blue</name>
+    <origin>Russia</origin>
+    <weight_range unit="kg" min="3" max="5.5">3–5.5 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Bengal</name>
+    <origin>United States</origin>
+    <weight_range unit="kg" min="3.5" max="7">3.5–7 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Siamese</name>
+    <origin>Thailand</origin>
+    <weight_range unit="kg" min="2.5" max="5.5">2.5–5.5 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Birman</name>
+    <origin>Myanmar (Burma)</origin>
+    <weight_range unit="kg" min="3" max="7">3–7 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Norwegian Forest Cat</name>
+    <origin>Norway</origin>
+    <weight_range unit="kg" min="3.5" max="9">3.5–9 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Persian</name>
+    <origin>Iran (Persia)</origin>
+    <weight_range unit="kg" min="3" max="6.5">3–6.5 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Turkish Angora</name>
+    <origin>Turkey</origin>
+    <weight_range unit="kg" min="2.5" max="5">2.5–5 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Sphynx</name>
+    <origin>Canada</origin>
+    <weight_range unit="kg" min="3" max="5.5">3–5.5 kg</weight_range>
+  </breed>
+  <breed>
+    <name>Devon Rex</name>
+    <origin>United Kingdom</origin>
+    <weight_range unit="kg" min="2.5" max="4.5">2.5–4.5 kg</weight_range>
+  </breed>
+</breeds>

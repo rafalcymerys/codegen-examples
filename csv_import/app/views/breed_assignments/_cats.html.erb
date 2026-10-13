@@ -1,0 +1,25 @@
+<section id="run_result" class="card">
+  <% cats = cat_import.cats.includes(:breed).order(:id).to_a %>
+  <h2>Cats and their breeds</h2>
+
+  <% if cats.any? %>
+    <div class="table-scroll">
+      <table class="table">
+        <thead>
+          <tr><th>Cat</th><th>Breed name in the data</th><th>Assigned breed</th></tr>
+        </thead>
+        <tbody>
+          <% cats.each do |cat| %>
+            <tr>
+              <td><%= cat.name %></td>
+              <td><%= cat.breed_name %></td>
+              <td><%= cat.breed&.name || tag.span("No breed yet", class: "muted") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="muted">This import has no cats yet.</p>
+  <% end %>
+</section>

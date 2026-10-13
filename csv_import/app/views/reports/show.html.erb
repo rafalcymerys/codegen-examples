@@ -1,0 +1,23 @@
+<% content_for :title, @report.name %>
+<%= turbo_stream_from @report %>
+
+<p><%= link_to "← #{@report.cat_import.name}", @report.cat_import %></p>
+
+<div class="page-head">
+  <div>
+    <h1>Report</h1>
+    <p class="muted">From the cats of <%= @report.cat_import.name %></p>
+  </div>
+  <%= button_to "Delete", @report, method: :delete, class: "button button-quiet",
+        form: { data: { turbo_confirm: "Delete this report?" } } %>
+</div>
+
+<section class="card">
+  <h2>Your request</h2>
+  <%= simple_format @report.prompt %>
+</section>
+
+<%= render "agent_runs/status", run: @report %>
+<%= render "agent_runs/question", run: @report %>
+<%= render "agent_runs/activity", run: @report %>
+<%= render "reports/result", report: @report %>

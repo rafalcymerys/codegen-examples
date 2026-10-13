@@ -1,0 +1,15 @@
+<section id="run_status" class="card status">
+  <div class="status-line">
+    <%= status_badge(run) %>
+    <% if run.pending? || run.processing? %><span class="spinner" aria-hidden="true"></span><% end %>
+    <% if run.failed? %>
+      <%= button_to "Retry", [ :retry, run ], class: "button button-small" %>
+    <% end %>
+  </div>
+
+  <% if run.completed? && run.summary.present? %>
+    <%= simple_format run.summary %>
+  <% elsif run.failed? && run.error_message.present? %>
+    <p class="error"><%= run.error_message %></p>
+  <% end %>
+</section>

@@ -1,0 +1,25 @@
+<section id="run_result" class="card">
+  <% if report.completed? %>
+    <h2><%= report.name %> <span class="muted">(<%= pluralize report.rows.size, "row" %>)</span></h2>
+
+    <div class="table-scroll">
+      <table class="table">
+        <thead>
+          <tr>
+            <% report.columns.each do |column| %><th><%= column %></th><% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% report.rows.each do |row| %>
+            <tr>
+              <% row.each do |cell| %><td class="<%= "numeric" if cell.is_a?(Numeric) %>"><%= cell %></td><% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <h2>Report</h2>
+    <p class="muted">The report will appear here once the agent has finished.</p>
+  <% end %>
+</section>

@@ -1,0 +1,11 @@
+/.bundle
+/.env*
+/log/*
+/tmp/*
+/storage/*
+!/log/.keep
+!/tmp/.keep
+!/storage/.keep
+/public/assets
+/config/master.key
+.DS_Store

@@ -1,0 +1,13 @@
+<li id="<%= dom_id(agent_event) %>" class="event event-<%= agent_event.kind %>">
+  <time class="muted"><%= agent_event.created_at.strftime("%H:%M:%S") %></time>
+  <div class="event-body">
+    <% if agent_event.detail.present? %>
+      <details>
+        <summary><%= agent_event.message %></summary>
+        <pre><%= agent_event.detail %></pre>
+      </details>
+    <% else %>
+      <%= agent_event.message %>
+    <% end %>
+  </div>
+</li>

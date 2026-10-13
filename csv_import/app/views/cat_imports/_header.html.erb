@@ -1,0 +1,28 @@
+<p><%= link_to "← All imports", root_path %></p>
+
+<div class="page-head">
+  <div>
+    <h1><%= cat_import.name %></h1>
+    <p class="muted"><%= cat_import.original_filename %> · <%= number_to_human_size(cat_import.byte_size) %></p>
+  </div>
+  <div class="actions">
+    <% if cat_import.completed? %>
+      <%= link_to "Create a report", new_cat_import_report_path(cat_import), class: "button" %>
+      <%= link_to "Create chart", new_cat_import_chart_path(cat_import), class: "button" %>
+    <% end %>
+    <%= button_to "Delete", cat_import, method: :delete, class: "button button-quiet",
+          form: { data: { turbo_confirm: "Delete this import with its cats, breeds, reports and charts?" } } %>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Import data">
+  <%= link_to cat_import_path(cat_import), class: "tab", aria: { current: (tab == "cats" ? "page" : nil) } do %>
+    Cats <span class="muted">(<%= cat_import.cats.count %>)</span>
+  <% end %>
+  <%= link_to cat_import_breeds_path(cat_import), class: "tab", aria: { current: (tab == "breeds" ? "page" : nil) } do %>
+    Breeds <span class="muted">(<%= cat_import.breeds.count %>)</span>
+  <% end %>
+  <%= link_to cat_import_breed_assignments_path(cat_import), class: "tab", aria: { current: (tab == "breed_assignments" ? "page" : nil) } do %>
+    Assign breeds <span class="muted">(<%= cat_import.cats.where(breed_id: nil).count %> without a breed)</span>
+  <% end %>
+</nav>

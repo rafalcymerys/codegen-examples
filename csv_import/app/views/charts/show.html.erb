@@ -1,0 +1,23 @@
+<% content_for :title, @chart.name %>
+<%= turbo_stream_from @chart %>
+
+<p><%= link_to "← #{@chart.cat_import.name}", @chart.cat_import %></p>
+
+<div class="page-head">
+  <div>
+    <h1>Chart</h1>
+    <p class="muted">From the cats and breeds of <%= @chart.cat_import.name %></p>
+  </div>
+  <%= button_to "Delete", @chart, method: :delete, class: "button button-quiet",
+        form: { data: { turbo_confirm: "Delete this chart?" } } %>
+</div>
+
+<section class="card">
+  <h2>Your request</h2>
+  <%= simple_format @chart.prompt %>
+</section>
+
+<%= render "agent_runs/status", run: @chart %>
+<%= render "agent_runs/question", run: @chart %>
+<%= render "charts/result", chart: @chart %>
+<%= render "agent_runs/activity", run: @chart %>

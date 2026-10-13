@@ -1,0 +1,36 @@
+<section id="run_result" class="card">
+  <% cats = cat_import.cats.order(:id).to_a %>
+  <h2>Cats <span class="muted">(<%= cats.size %>)</span></h2>
+  <% if cats.any? && cat_import.breeds.any? %>
+    <p class="muted"><%= cats.count(&:breed_id) %> of <%= cats.size %> cats are linked to a breed (underlined breed names).</p>
+  <% end %>
+
+  <% if cats.any? %>
+    <div class="table-scroll">
+      <table class="table">
+        <thead>
+          <tr>
+            <% Cat::FIELDS.each_key do |field| %><th><%= field.to_s.humanize %></th><% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% cats.each do |cat| %>
+            <tr>
+              <% Cat::FIELDS.each_key do |field| %>
+                <td>
+                  <% if field == :breed_name && cat.breed_id %>
+                    <%= link_to cat.breed_name, cat_import_breeds_path(cat_import), title: "Linked to the breeds table" %>
+                  <% else %>
+                    <%= cat.public_send(field) %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="muted">Nothing imported yet.</p>
+  <% end %>
+</section>

@@ -1,0 +1,19 @@
+<% content_for :title, "New report" %>
+
+<p><%= link_to "← #{@cat_import.name}", @cat_import %></p>
+
+<h1>Create a report</h1>
+<p class="muted">From the <%= pluralize @cat_import.cats.count, "cat" %> and <%= pluralize @cat_import.breeds.count, "breed" %> of <%= @cat_import.name %>.</p>
+
+<section class="card">
+  <%= form_with model: [ @cat_import, @report ] do |form| %>
+    <%= form.label :prompt, "What do you want in the report?" %>
+    <%= form.text_area :prompt, rows: 6, required: true, autofocus: true,
+          placeholder: "e.g. Number of cats per city with the most common favorite food, sorted by the number of cats" %>
+    <% if @report.errors.any? %>
+      <p class="error"><%= @report.errors.full_messages.to_sentence %></p>
+    <% end %>
+    <p class="muted">An AI agent analyses the imported cats and breeds and builds a table for you. If your request is unclear, it asks you.</p>
+    <%= form.submit "Create report", class: "button" %>
+  <% end %>
+</section>

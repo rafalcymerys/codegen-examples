@@ -1,0 +1,13 @@
+<div id="run_question">
+  <% if run.waiting_for_user? && (question = run.pending_question) %>
+    <section class="card question">
+      <h2>The agent has a question</h2>
+      <%= simple_format question.question %>
+
+      <%= form_with url: answer_question_path(question), class: "form-row" do |form| %>
+        <%= form.text_field :answer, required: true, autofocus: true, autocomplete: "off", placeholder: "Your answer" %>
+        <%= form.submit "Send answer", class: "button" %>
+      <% end %>
+    </section>
+  <% end %>
+</div>

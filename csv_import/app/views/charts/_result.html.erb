@@ -1,0 +1,12 @@
+<section id="run_result" class="card">
+  <% if chart.completed? %>
+    <div class="result-head">
+      <h2><%= chart.name %></h2>
+      <%= link_to "Download PNG", image_chart_path(chart, download: 1, v: chart.updated_at.to_i), class: "button button-small", download: true %>
+    </div>
+    <%= image_tag image_chart_path(chart, v: chart.updated_at.to_i), alt: chart.name, class: "chart-image" %>
+  <% else %>
+    <h2>Chart</h2>
+    <p class="muted">The chart will appear here once the agent has finished.</p>
+  <% end %>
+</section>

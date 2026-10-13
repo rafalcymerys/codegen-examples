@@ -1,0 +1,42 @@
+<% content_for :title, "#{@cat_import.name} – Assign breeds" %>
+<%= render "cat_imports/header", cat_import: @cat_import, tab: "breed_assignments" %>
+
+<% cats = @cat_import.cats %>
+<% without_breed = cats.where(breed_id: nil).count %>
+<% running = @breed_assignment && !(@breed_assignment.completed? || @breed_assignment.failed?) %>
+
+<section class="card">
+  <h2>Assign breeds to cats</h2>
+  <p class="muted">
+    The breed assignment agent links every cat to one of the import's breeds, using the breed name from the cat
+    data. It runs code to match the names and keeps going until every cat has a breed, asking you about names it
+    cannot match.
+  </p>
+
+  <div class="status-line">
+    <strong><%= cats.count - without_breed %> of <%= pluralize cats.count, "cat" %></strong>
+    <span class="muted">have a breed · <%= pluralize @cat_import.breeds.count, "breed" %> available</span>
+  </div>
+
+  <div class="form-row">
+    <% if @cat_import.breeds.none? %>
+      <p class="muted">Import breeds on the <%= link_to "Breeds", cat_import_breeds_path(@cat_import) %> tab first.</p>
+    <% elsif cats.any? && without_breed.zero? %>
+      <p class="muted">Every cat has a breed.</p>
+    <% elsif running %>
+      <p class="muted">The agent is working on it.</p>
+    <% elsif cats.any? %>
+      <%= button_to "Assign breeds", cat_import_breed_assignments_path(@cat_import), class: "button" %>
+    <% end %>
+  </div>
+</section>
+
+<% if @breed_assignment %>
+  <%= turbo_stream_from @breed_assignment %>
+
+  <%= render "agent_runs/status", run: @breed_assignment %>
+  <%= render "agent_runs/question", run: @breed_assignment %>
+  <%= render "agent_runs/activity", run: @breed_assignment %>
+<% end %>
+
+<%= render "breed_assignments/cats", cat_import: @cat_import %>

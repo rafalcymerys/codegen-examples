@@ -1,0 +1,32 @@
+<% content_for :title, "#{@cat_import.name} – Breeds" %>
+<%= render "cat_imports/header", cat_import: @cat_import, tab: "breeds" %>
+
+<section class="card">
+  <h2>Import breeds from an API</h2>
+  <p class="muted">
+    Enter the URL of an API with cat breeds. The breeds import agent explores the API, works out how to extract
+    the breeds and transforms them into the breeds table. A new import replaces the breeds of this import.
+  </p>
+
+  <%= form_with url: cat_import_breed_imports_path(@cat_import), class: "form-row" do |form| %>
+    <%= form.url_field :url, required: true, autocomplete: "off", placeholder: "https://api.example.com/v1/breeds" %>
+    <%= form.submit "Import breeds", class: "button" %>
+  <% end %>
+
+  <details class="schema-details">
+    <summary>Fields of the breeds table</summary>
+    <p class="muted">Every field is required: if a value is missing or something in the API is ambiguous, the agent asks you what to do.</p>
+    <%= render "cat_imports/schema", fields: Breed::FIELDS %>
+  </details>
+</section>
+
+<% if @breed_import %>
+  <%= turbo_stream_from @breed_import %>
+
+  <p class="muted run-caption">Latest import: <%= @breed_import.url %></p>
+  <%= render "agent_runs/status", run: @breed_import %>
+  <%= render "agent_runs/question", run: @breed_import %>
+  <%= render "agent_runs/activity", run: @breed_import %>
+<% end %>
+
+<%= render "breeds/table", cat_import: @cat_import %>

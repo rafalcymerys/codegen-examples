@@ -1,0 +1,16 @@
+<div class="table-scroll">
+  <table class="table schema">
+    <thead>
+      <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <% fields.each do |field, spec| %>
+        <tr>
+          <td><code><%= field %></code></td>
+          <td class="muted"><%= spec[:type] %></td>
+          <td><%= spec[:description] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

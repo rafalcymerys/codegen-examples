@@ -1,0 +1,55 @@
+<section class="card">
+  <h2>Overview</h2>
+  <p>
+    Upload a file with a list of cats, in any format. An AI agent works out how the file is structured
+    and imports it into a table with the schema below. Every field is required: if a value is missing or
+    something in the file is ambiguous, the agent asks you what to do.
+  </p>
+
+  <%= render "cat_imports/schema", fields: Cat::FIELDS %>
+</section>
+
+<section class="card">
+  <h2>Start a new import</h2>
+  <p class="muted">Drop any file with a list of cats. The import agent figures out the format and transforms it into our table.</p>
+
+  <%= form_with url: cat_imports_path, multipart: true, data: { controller: "dropzone" } do |form| %>
+    <label class="dropzone" data-dropzone-target="zone"
+           data-action="dragover->dropzone#over dragleave->dropzone#leave drop->dropzone#drop">
+      <%= form.file_field :file, required: true, class: "dropzone-input",
+            data: { dropzone_target: "input", action: "change->dropzone#changed" } %>
+      <strong data-dropzone-target="label">Drop a file here or click to choose one</strong>
+      <span class="muted">Any file type</span>
+    </label>
+
+    <div class="form-row">
+      <%= form.text_field :name, placeholder: "Import name (optional, defaults to the file name)", autocomplete: "off" %>
+      <%= form.submit "Start import", class: "button", disabled: true, data: { dropzone_target: "submit" } %>
+    </div>
+  <% end %>
+</section>
+
+<section class="card">
+  <h2>Existing imports</h2>
+
+  <% if @cat_imports.any? %>
+    <table class="table">
+      <thead>
+        <tr><th>Name</th><th>File</th><th>Status</th><th class="numeric">Cats</th><th>Created</th></tr>
+      </thead>
+      <tbody>
+        <% @cat_imports.each do |cat_import| %>
+          <tr>
+            <td><%= link_to cat_import.name, cat_import %></td>
+            <td class="muted"><%= cat_import.original_filename %></td>
+            <td><%= status_badge(cat_import) %></td>
+            <td class="numeric"><%= cat_import.cats.size %></td>
+            <td class="muted"><%= time_ago_in_words(cat_import.created_at) %> ago</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="muted">No imports yet.</p>
+  <% end %>
+</section>

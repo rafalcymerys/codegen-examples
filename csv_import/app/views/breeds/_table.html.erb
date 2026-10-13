@@ -1,0 +1,29 @@
+<section id="run_result" class="card">
+  <% breeds = cat_import.breeds.order(:name).to_a %>
+  <h2>Breeds <span class="muted">(<%= breeds.size %>)</span></h2>
+
+  <% if breeds.any? %>
+    <div class="table-scroll">
+      <table class="table">
+        <thead>
+          <tr>
+            <% Breed::FIELDS.each do |field, spec| %>
+              <th class="<%= "numeric" unless spec[:type] == "string" %>"><%= field.to_s.humanize %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% breeds.each do |breed| %>
+            <tr>
+              <% Breed::FIELDS.each do |field, spec| %>
+                <td class="<%= "numeric" unless spec[:type] == "string" %>"><%= breed.public_send(field) %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="muted">This import has no breeds yet.</p>
+  <% end %>
+</section>
